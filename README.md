@@ -42,7 +42,15 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
-
+I collected 200 public questions from the Movies & TV Stack Exchange
+community, which covers films and television across many decades, countries,
+genres, and production roles rather than one show or release. The source is
+public without an invited account: I used the Stack Exchange API's `movies`
+site endpoint with the `withbody` filter and kept each question title and full
+body. The classifier sorts each question into `scene_identification`,
+`production_detail`, `plot_interpretation`, or `fact_context`. I read 30
+questions closely before settling the distinctions and retained the source URL
+in each row's `note` field.
 
 ---
 
@@ -54,33 +62,86 @@
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `scene_identification`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** Asks to identify a film or television work from a remembered
+scene, image, line, or sequence.
 
 **Example 1:**
->
+> Film where the scalp of the co-pilot of a plane is removed during flight
 
 **Example 2:**
->
+> Identify a 2016 TV show episode from a single scene: Female close-up hand
+enters a keypad door code with an audio bridge
+
+### `production_detail`
+
+**Definition:** Primarily asks how a film or television work was made,
+performed, edited, credited, translated, or technically achieved; the requested
+answer is about real-world production, not an in-story cause.
+
+**Example 1:**
+> How do they film the mirror scenes in movies?
+
+**Example 2:**
+> How do actors stop breathing when playing "dead"?
+
+### `plot_interpretation`
+
+**Definition:** Primarily asks why an in-story event happens or what a
+character, ending, title, or theme means; the requested answer must be an
+interpretation of the fictional work.
+
+**Example 1:**
+> What caused and ended the time loop in Groundhog Day?
+
+**Example 2:**
+> Is there any definitive evidence that Teddy was or was not crazy?
+
+### `fact_context`
+
+**Definition:** Primarily asks for a checkable fact or external context about a
+work, release, language, technology, or relationship that is not a production
+technique or an in-story interpretation.
+
+**Example 1:**
+> Is the Unix operating system featured in Jurassic Park real?
+
+**Example 2:**
+> What's the difference between "and" and "&" in movie credits?
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `plot_interpretation` and `fact_context`
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**The decision rule I used every time:** Label the primary answer being
+requested, in this order: (1) identify the work from remembered scene details
+as `scene_identification`; (2) explain a real-world filmmaking method as
+`production_detail`; (3) explain an event, character choice, ending, title, or
+theme inside the fictional work as `plot_interpretation`; (4) use
+`fact_context` for a checkable external fact or relationship. A question's
+wording ("why" or "how") does not override the subject of the answer.
+
+### Boundary stress test
+
+I gave the four definitions and the precedence rule to an AI tool and asked it
+for eight deliberately borderline questions. I classified each before looking
+for overlap:
+
+| Generated boundary post | Classification | Why |
+|---|---|---|
+| “I remember a black-and-white thriller where a woman hears a phone ring in an empty station. What film is it?” | `scene_identification` | The requested answer is the work's name. |
+| “Which movie has the scene where a child repeats ‘don't open the red door’ while the camera stays outside?” | `scene_identification` | The concrete remembered sequence is evidence for identification. |
+| “Why does the hero leave the money behind after finding it in the final scene?” | `plot_interpretation` | It asks for an in-story character motivation. |
+| “The ending shows the clock stopped at 3:17; what does that detail mean?” | `plot_interpretation` | It asks for meaning within the film, even though the answer may be uncertain. |
+| “How did the crew hide the camera in the apartment mirror shot?” | `production_detail` | It asks for a real-world filming technique. |
+| “Why did the director cut from the actor’s face to a close-up of the key?” | `production_detail` | The question is about an editing choice made by filmmakers, not a character’s reason. |
+| “Was the computer interface shown in the film based on a real operating system?” | `fact_context` | It asks for an externally checkable technology fact. |
+| “Which release of the film is the official continuity for the sequel?” | `fact_context` | It asks for a release/continuity relationship, not what an in-story event means. |
+
+The test exposed one important tightening: “why” alone is not enough to assign
+`plot_interpretation`. I now ask whether the answer concerns fictional events,
+production decisions, or an external fact, and use the precedence order above.
 
 
 
@@ -93,17 +154,39 @@
 
 **Where the posts came from:**
 
+The posts came from the public Movies & TV Stack Exchange API:
+https://api.stackexchange.com/2.3/questions?site=movies&pagesize=100&filter=withbody.
+The API returned public question text and source links; no login, invitation, or
+private community was used.
+
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
 Say so plainly — the disclosure is required, not penalised. -->
+
+I read 30 posts before fixing the taxonomy. I then applied the written
+question-type rule to the 200-row corpus, using source tags and wording as a
+pre-labeling aid, and spot-checked the resulting rows against the full text.
+This is disclosed pre-labeling, not a claim that every label was assigned
+unaided.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `scene_identification` | 34 | 17.0% |
+| `production_detail` | 40 | 20.0% |
+| `plot_interpretation` | 75 | 37.5% |
+| `fact_context` | 51 | 25.5% |
+| **Total** | **200** | **100%** |
+
+**What I noticed while reading 30–40 posts:** The most substantial questions
+usually named a concrete scene, quote, date, device, or character and supplied
+enough surrounding context to make the question testable. Several plot
+questions compared multiple events or competing explanations rather than just
+asserting that a scene was confusing. Production questions often named a
+specific technique or artifact (mirrors, credits, subtitles, Unix interfaces).
+The weakest-looking examples were short questions with one unsupported premise
+and little context; that observation informed the hard boundary, but I did not
+use "good" versus "bad" as a label.
 
 **Three hard cases**
 
@@ -111,25 +194,29 @@ Say so plainly — the disclosure is required, not penalised. -->
      been, and what you chose. These are worth more than the easy 190. -->
 
 **1.**
-> *The post:*
+> *The post:* Why does the talk show host always sit on the right?
 >
-> *Could have been:*
+> *Could have been:* `fact_context` or `production_detail`
 >
-> *I chose, because:*
+> *I chose, because:* `fact_context`; it asks for a convention's external
+context, not how a particular programme was filmed.
 
 **2.**
-> *The post:*
+> *The post:* Is the title "The Last Jedi" singular or plural?
 >
-> *Could have been:*
+> *Could have been:* `plot_interpretation` or `fact_context`
 >
-> *I chose, because:*
+> *I chose, because:* `plot_interpretation`; the question asks what the title
+refers to within the story, not merely how the title was translated.
 
 **3.**
-> *The post:*
+> *The post: Which version of Blade Runner is Blade Runner 2049 a sequel of?
 >
 > *Could have been:*
+`fact_context` or `plot_interpretation`
 >
-> *I chose, because:*
+> *I chose, because:* `fact_context`; it asks for an externally checkable
+production/release relationship and explicitly rejects opinion.
 
 ---
 
@@ -147,7 +234,7 @@ Say so plainly — the disclosure is required, not penalised. -->
 split. If a label had fewer than about 8 in test, say so — it explains a lot
 of next unit's variance. -->
 
-
+Pending the notebook training run.
 
 ---
 
@@ -162,17 +249,27 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Help me turn observations from a broad film-question
+community into mutually exclusive labels.
+- *What came back:* Candidate distinctions based on question purpose rather than
+a subjective good/bad score.
+- *What I changed:* I kept four operational labels and wrote a precedence rule
+for the plot/fact boundary.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Help collect and organize 200 public questions without
+using a login.
+- *What came back:* A public Stack Exchange API collection with title, full
+body, tags, and source link.
+- *What I changed:* I read a 30-question sample, retained the complete text,
+and disclosed the rule-based pre-labeling.
 
 **Pre-labelling disclosure:**
+
+The first-pass labels were generated from the question title, public tags, and
+the written taxonomy rule, then spot-checked. No private, invited, or
+login-gated material was used.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 

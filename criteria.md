@@ -53,11 +53,10 @@ whether you hit them:
 
 ## 1.
 
-<!-- Your criterion. It must name a number. -->
+Overall accuracy is at least 0.65 on the held-out test set.
 
 
-
-**Why this target:**
+**Why this target:** Four labels make random guessing about 0.25, so 0.65 would indicate that the model learned the question-type vocabulary rather than only the most common label. The corpus has deliberately different kinds of film questions, so I do not expect near-perfect accuracy.
 
 
 
@@ -65,11 +64,10 @@ whether you hit them:
 
 ## 2.
 
-<!-- Your criterion. -->
+Macro F1 is at least 0.60 on the held-out test set.
 
 
-
-**Why this target:**
+**Why this target:** Macro F1 gives the 34 scene-identification examples the same weight as the 75 plot-interpretation examples. The smaller identification class should be noisier, so 0.60 is a useful but realistic overall balance target.
 
 
 
@@ -77,11 +75,10 @@ whether you hit them:
 
 ## 3.
 
-<!-- Your criterion. -->
+Every label has an F1 of at least 0.45 on the held-out test set.
 
 
-
-**Why this target:**
+**Why this target:** The hardest boundary is plot interpretation versus fact/context, while scene identification has fewer examples. A 0.45 floor allows for those difficult cases but still requires every label to perform better than a weak one-label strategy.
 
 
 
@@ -89,11 +86,10 @@ whether you hit them:
 
 ## 4.
 
-<!-- Your criterion. -->
+The largest and smallest label shares differ by no more than 20 percentage points.
 
 
-
-**Why this target:**
+**Why this target:** The source naturally contains many plot questions and fewer identification questions. The current 75-versus-34 spread is 20.5 points, so this target checks whether later additions or corrections make the training set materially more lopsided.
 
 
 
@@ -101,11 +97,10 @@ whether you hit them:
 
 ## 5.
 
-<!-- Your criterion. -->
+On the 30-post staff agreement set, my labels agree with staff on at least 24 posts (80%).
 
 
-
-**Why this target:**
+**Why this target:** Agreement is a separate check on labeling consistency rather than model performance. An 80% target leaves room for genuinely ambiguous examples while requiring me to apply written decision rules consistently.
 
 
 
