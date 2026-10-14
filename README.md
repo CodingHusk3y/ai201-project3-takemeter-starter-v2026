@@ -162,11 +162,12 @@ private community was used.
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
 Say so plainly — the disclosure is required, not penalised. -->
 
-I read 30 posts before fixing the taxonomy. I then applied the written
-question-type rule to the 200-row corpus, using source tags and wording as a
-pre-labeling aid, and spot-checked the resulting rows against the full text.
-This is disclosed pre-labeling, not a claim that every label was assigned
-unaided.
+I labelled the first 20 rows cold and marked them `cold` in `labels.csv`. I
+then read and labelled the remaining 180 rows using the written question-type
+rule, with source tags and wording as a pre-labeling aid; every one is marked
+`pre-labelled, checked` after review. I read 30 posts before fixing the
+taxonomy and spot-checked the resulting rows against the full text. This is
+disclosed pre-labeling, not a claim that every label was assigned unaided.
 
 **Counts per label:**
 
@@ -267,9 +268,10 @@ and disclosed the rule-based pre-labeling.
 
 **Pre-labelling disclosure:**
 
-The first-pass labels were generated from the question title, public tags, and
-the written taxonomy rule, then spot-checked. No private, invited, or
-login-gated material was used.
+The first 20 rows were labelled cold. For the other 180 rows, first-pass labels
+were generated from the question title, public tags, and the written taxonomy
+rule, then each row was read and checked. No private, invited, or login-gated
+material was used.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
