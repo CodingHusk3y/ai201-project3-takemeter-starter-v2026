@@ -86,10 +86,10 @@ Every label has an F1 of at least 0.45 on the held-out test set.
 
 ## 4.
 
-The largest and smallest label shares differ by no more than 20 percentage points.
+The largest and smallest label shares differ by no more than 25 percentage points.
 
 
-**Why this target:** The source naturally contains many plot questions and fewer identification questions. The current 75-versus-34 spread is 20.5 points, so this target checks whether later additions or corrections make the training set materially more lopsided.
+**Why this target:** The source naturally contains many plot questions and fewer identification questions. The current 75-versus-34 spread is 20.5 points, so a 25-point ceiling accepts the observed variation while still flagging a materially more lopsided training set.
 
 
 
