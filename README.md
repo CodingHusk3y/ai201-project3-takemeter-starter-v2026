@@ -225,17 +225,26 @@ production/release relationship and explicitly rejects opinion.
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate `2e-5`, batch size 16, maximum length 128,
+seed 42
 
-**Anything I changed from the defaults, and why:**
+**Anything I changed from the defaults, and why:** I used the notebook defaults.
+I corrected the starter label map to match my four labels.
 
 **Split sizes:** <!-- train / val / test, and per-label counts in the test
 split. If a label had fewer than about 8 in test, say so — it explains a lot
 of next unit's variance. -->
 
-Pending the notebook training run.
+Train 139 / validation 31 / test 30. Test counts were 5
+`scene_identification`, 6 `production_detail`, 11 `plot_interpretation`, and 8
+`fact_context`; the first two are below 8, so their scores will be especially
+jumpy across seeds.
+
+**Training device:** CPU on Linux, with PyTorch `2.14.1+cu130` in the project's
+`.venv` (Python 3.12.3). The notebook recorded `device: cpu` and `device_name:
+CPU` in `results.json`.
 
 ---
 
