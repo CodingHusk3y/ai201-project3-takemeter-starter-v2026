@@ -268,12 +268,15 @@ for the plot/fact boundary.
 
 **Moment 2**
 
-- *What I asked for:* Help collect and organize 200 public questions without
-using a login.
-- *What came back:* A public Stack Exchange API collection with title, full
-body, tags, and source link.
-- *What I changed:* I read a 30-question sample, retained the complete text,
-and disclosed the rule-based pre-labeling.
+- *What I asked for:* Stress-test the four definitions by writing eight posts
+that sit on their boundaries.
+- *What came back:* Borderline examples involving scene identification versus
+plot interpretation, production choices versus in-story causes, and external
+facts versus fictional meaning.
+- *What I changed:* I classified every generated example, then tightened the
+definitions and added a precedence rule based on the answer being requested.
+The public posts themselves were collected through the Stack Exchange API, not
+from a private or login-gated source.
 
 **Pre-labelling disclosure:**
 
