@@ -496,25 +496,42 @@ it does not prove that my separate 200-post taxonomy was consistently applied.
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** I increased `EPOCHS` from 3 to 5 in the notebook. I did not
+change the model, learning rate, batch size, data, labels, or seeds.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** The model was under-learning the four-way
+boundary: before the change, 19 of 30 test posts from three labels were
+collapsed into `plot_interpretation`, while staff agreement was 30/30, giving
+no evidence that relabeling would address the problem. More training was one
+isolated test of whether the model needed additional optimization.
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.650 in every seed | 0.500 | 0.433 | 0.600 | MISSED |
+| 2. Macro F1 | ≥ 0.600 in every seed | 0.412 | 0.284 | 0.551 | MISSED |
+| 3. Every label F1 | ≥ 0.450 in every seed | 0.000 | 0.000 | 0.000 | MISSED |
+| 4. Largest-smallest label share | ≤ 25 percentage points | 20.5 pp | 20.5 pp | 20.5 pp | MET |
+| 5. Staff agreement | ≥ 24/30 posts | 30/30 | 30/30 | 30/30 | MET |
 
 **Did it help, and how do I know:**
 
 <!-- If it didn't, say so. Relabelling that didn't help is a genuinely
      interesting result and earns full credit. -->
 
+Yes, but not enough to meet the performance targets. Mean accuracy rose from
+0.378 before to 0.511 after, a +0.133 improvement; mean macro F1 rose from
+0.163 to 0.416, a +0.253 improvement. The per-label results also show real
+movement: `scene_identification` reached F1 values of 0.750, 0.571, and 0.889,
+and `production_detail` reached 0.286, 0.000, and 0.667. However,
+`fact_context` remained at F1 0.000 in every after seed, and seed 7 still had
+zero F1 for `production_detail`, so criteria 1–3 remain missed under the
+all-seeds rule.
+
+The improvement also increased accuracy spread from 0.033 to 0.167, so the
+after result is less stable across splits. That is evidence that five epochs
+helped some splits but made the small dataset's variance more visible.
 
 
 ---
