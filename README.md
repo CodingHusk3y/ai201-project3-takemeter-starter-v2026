@@ -299,19 +299,31 @@ material was used.
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.167 | 0.367 | +0.200 |
+| Macro F1 | 0.074 | 0.134 | +0.061 |
+| F1 — `fact_context` | 0.000 | 0.000 | +0.000 |
+| F1 — `plot_interpretation` | 0.000 | 0.537 | +0.537 |
+| F1 — `production_detail` | 0.000 | 0.000 | +0.000 |
+| F1 — `scene_identification` | 0.294 | 0.000 | -0.294 |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+I predict the trained model will beat the zero-shot baseline most clearly on `plot_interpretation` and `production_detail`, where the label distinctions require domain-specific context.
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
+On these same 30 held-out posts, fine-tuning improved accuracy by 0.200 and
+macro F1 by 0.061, driven entirely by `plot_interpretation`; it did not improve
+`fact_context` or `production_detail`, and it lost the baseline's
+`scene_identification` performance.
 
+I also ran the baseline without `label_definitions.txt` using bare label names:
+accuracy was 0.300 and macro F1 was 0.326, compared with 0.167 and 0.074 with
+the definitions. On this split, the definitions reduced accuracy by 0.133 and
+macro F1 by 0.252, so I report the definition-backed run as the fair prompt
+specified by the taxonomy rather than the stronger bare-name ablation.
 
 
 ---
