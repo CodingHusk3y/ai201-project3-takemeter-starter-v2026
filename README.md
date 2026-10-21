@@ -339,7 +339,7 @@ specified by the taxonomy rather than the stronger bare-name ablation.
 | 2. Macro F1 | at least 0.600 | 0.134 | 0.134 | 0.221 | MISSED |
 | 3. Every label F1 | at least 0.450 | 0.000 | 0.000 | 0.000 | MISSED |
 | 4. Largest-smallest label share | no more than 25 percentage points | 20.5 pp | 20.5 pp | 20.5 pp | MET |
-| 5. Staff agreement | at least 24/30 posts | not evaluated | not evaluated | not evaluated | PENDING |
+| 5. Staff agreement | at least 24/30 posts | 30/30 | 30/30 | 30/30 | MET |
 
 The accuracy spread was 0.033 across the three seeds, below the roughly
 ten-point warning threshold, so accuracy is stable enough to trust on this
@@ -363,7 +363,7 @@ The complete section 6 spread table was:
      An image of a matrix earns nothing. -->
 
 | true \ predicted | scene_identification | production_detail | plot_interpretation | fact_context |
-|---|---|---|---|
+|---|---|---|---|---|
 | **scene_identification** | 0 | 0 | 5 | 0 |
 | **production_detail** | 0 | 0 | 6 | 0 |
 | **plot_interpretation** | 0 | 0 | 11 | 0 |
@@ -389,14 +389,49 @@ that boundary.
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.650 in every seed | MISSED | 0.367, 0.367, and 0.400 are all below 0.650. |
+| 2 | Macro F1 | ≥ 0.600 in every seed | MISSED | 0.134, 0.134, and 0.221 are all below 0.600. |
+| 3 | Every label F1 | ≥ 0.450 in every seed | MISSED | `production_detail` and `fact_context` are 0.000 in every seed; `scene_identification` is 0.000, 0.000, and 0.333. |
+| 4 | Largest-smallest label share | ≤ 25 percentage points | MET | The observed 20.5-point share gap is below the 25-point ceiling. |
+| 5 | Staff agreement | ≥ 24/30 posts | MET | The independent staff-taxonomy labels matched 30/30 staff labels. |
 
 **Diagnoses**
+1. **Criterion 1 — task/model capacity, not a seed accident.** Accuracy is
+   consistently low across all three seeds (0.367–0.400) while its spread is
+   only 0.033, so the miss is not caused by a friendly or hostile split. The
+   confusion matrix shows 19 of 30 posts from `scene_identification`,
+   `production_detail`, and `fact_context` all collapsed into
+   `plot_interpretation`; the 200-example training set did not teach reliable
+   boundaries among these question types.
 
+2. **Criterion 2 — the same systematic collapse damages macro F1.** Macro F1
+   remains 0.134, 0.134, and 0.221 because three labels have zero F1 in the
+   first two seeds and `production_detail` and `fact_context` remain at zero
+   in all seeds. This is not primarily a labeling-consistency diagnosis:
+   the separate staff-taxonomy check achieved 30/30 agreement, and the
+   three-seed pattern is stable. The model has learned one broad
+   `plot_interpretation` region rather than four usable classes.
+
+3. **Criterion 3 — too few effective examples and hard boundaries.** The
+   smallest class, `scene_identification`, has only 5 test examples and its
+   F1 swings from 0.000 to 0.333, showing sampling sensitivity. More
+   importantly, `production_detail` (6 test examples) and `fact_context` (8)
+   have F1 0.000 across every seed, with all 14 of those posts predicted as
+   `plot_interpretation`. The definitions distinguish real-world production
+   facts and external facts from in-story interpretation, but those semantic
+   boundaries are genuinely hard for this small dataset. The 30/30 staff
+   agreement gives no evidence that inconsistent application of a written
+   boundary caused this result.
+
+4. **Criterion 4 — met, but it does not guarantee learnability.** The label
+   shares stayed within the target at a 20.5-point maximum gap. Balance alone
+   did not prevent the model from collapsing labels, so the failure is about
+   separability and effective examples rather than the stated balance limit.
+
+5. **Criterion 5 — met independently of model performance.** All 30 labels
+   matched staff under the staff taxonomy. This supports consistent rule
+   application on the comparison sample, but it cannot prove that every one of
+   the separate 200 training labels was equally consistent.
 <!-- For each miss: the cause, and how you know. The four common causes are:
      too few examples for a label, a boundary you applied inconsistently, a
      genuinely hard label pair, and a task the model can't reach from this
