@@ -418,7 +418,13 @@ that boundary.
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 30 / 30 = 100%
+
+I matched staff on every post. This set was easier than the warning about
+genuinely ambiguous examples suggested, but the result also indicates that the
+three-way rules were tight enough for me to apply consistently: the
+evidence-load-bearing test separated analysis from hot take, while recency and
+personal experience separated reaction from unsupported general claims.
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -440,26 +446,15 @@ that boundary.
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+There were no disagreements to adjudicate, so piles (a), (b), and (c) are
+empty. I therefore have no evidence from this 30-post set of a consistency
+problem or a gap/ambiguity in the staff rules.
 
 **What the pattern in my disagreements tells me:**
 
+There is no disagreement pattern: all 30 labels matched. This supports the
+claim that I could apply the staff taxonomy consistently on this sample, but
+it does not prove that my separate 200-post taxonomy was consistently applied.
 
 
 ---
