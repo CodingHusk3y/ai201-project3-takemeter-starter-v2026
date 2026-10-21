@@ -335,28 +335,49 @@ specified by the taxonomy rather than the stronger bare-name ablation.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | at least 0.650 | 0.367 | 0.367 | 0.400 | MISSED |
+| 2. Macro F1 | at least 0.600 | 0.134 | 0.134 | 0.221 | MISSED |
+| 3. Every label F1 | at least 0.450 | 0.000 | 0.000 | 0.000 | MISSED |
+| 4. Largest-smallest label share | no more than 25 percentage points | 20.5 pp | 20.5 pp | 20.5 pp | MET |
+| 5. Staff agreement | at least 24/30 posts | not evaluated | not evaluated | not evaluated | PENDING |
+
+The accuracy spread was 0.033 across the three seeds, below the roughly
+ten-point warning threshold, so accuracy is stable enough to trust on this
+dataset. Macro F1 varied more (0.134, 0.134, and 0.221), largely because the
+small `scene_identification` class changed from F1 0.000 to 0.333.
+
+The complete section 6 spread table was:
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.367 | 0.367 | 0.400 | 0.033 |
+| Macro F1 | 0.134 | 0.134 | 0.221 | 0.087 |
+| F1 — `scene_identification` | 0.000 | 0.000 | 0.333 | 0.333 |
+| F1 — `production_detail` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `plot_interpretation` | 0.537 | 0.537 | 0.550 | 0.013 |
+| F1 — `fact_context` | 0.000 | 0.000 | 0.000 | 0.000 |
 
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
+| true \ predicted | scene_identification | production_detail | plot_interpretation | fact_context |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **scene_identification** | 0 | 0 | 5 | 0 |
+| **production_detail** | 0 | 0 | 6 | 0 |
+| **plot_interpretation** | 0 | 0 | 11 | 0 |
+| **fact_context** | 0 | 0 | 8 | 0 |
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
 
+The biggest directional error was that 8 real `fact_context` posts were called
+`plot_interpretation`, while 0 `plot_interpretation` posts were called
+`fact_context`, so the model strongly leans toward `plot_interpretation` at
+that boundary.
 
 
 ---

@@ -1,0 +1,209 @@
+[
+  {
+    "seed": 42,
+    "n_test": 30,
+    "accuracy": 0.36666666666666664,
+    "f1_macro": 0.13414634146341464,
+    "per_label": {
+      "scene_identification": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 5
+      },
+      "production_detail": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 6
+      },
+      "plot_interpretation": {
+        "precision": 0.36666666666666664,
+        "recall": 1.0,
+        "f1": 0.5365853658536586,
+        "support": 11
+      },
+      "fact_context": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "scene_identification": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 5,
+        "fact_context": 0
+      },
+      "production_detail": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 6,
+        "fact_context": 0
+      },
+      "plot_interpretation": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 11,
+        "fact_context": 0
+      },
+      "fact_context": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 8,
+        "fact_context": 0
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.39086905121803284,
+      "mean_when_wrong": 0.3591657280921936,
+      "accuracy_most_confident_third": 0.7,
+      "accuracy_least_confident_third": 0.2,
+      "n_per_third": 10
+    },
+    "device": "cpu",
+    "device_name": "CPU",
+    "torch_version": "2.14.1+cu130",
+    "max_length": 128
+  },
+  {
+    "seed": 7,
+    "n_test": 30,
+    "accuracy": 0.36666666666666664,
+    "f1_macro": 0.13414634146341464,
+    "per_label": {
+      "scene_identification": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 5
+      },
+      "production_detail": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 6
+      },
+      "plot_interpretation": {
+        "precision": 0.36666666666666664,
+        "recall": 1.0,
+        "f1": 0.5365853658536586,
+        "support": 11
+      },
+      "fact_context": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "scene_identification": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 5,
+        "fact_context": 0
+      },
+      "production_detail": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 6,
+        "fact_context": 0
+      },
+      "plot_interpretation": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 11,
+        "fact_context": 0
+      },
+      "fact_context": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 8,
+        "fact_context": 0
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.36471280455589294,
+      "mean_when_wrong": 0.33285704255104065,
+      "accuracy_most_confident_third": 0.8,
+      "accuracy_least_confident_third": 0.2,
+      "n_per_third": 10
+    },
+    "device": "cpu",
+    "device_name": "CPU",
+    "torch_version": "2.14.1+cu130",
+    "max_length": 128
+  },
+  {
+    "seed": 2024,
+    "n_test": 30,
+    "accuracy": 0.4,
+    "f1_macro": 0.22083333333333333,
+    "per_label": {
+      "scene_identification": {
+        "precision": 1.0,
+        "recall": 0.2,
+        "f1": 0.3333333333333333,
+        "support": 5
+      },
+      "production_detail": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 6
+      },
+      "plot_interpretation": {
+        "precision": 0.3793103448275862,
+        "recall": 1.0,
+        "f1": 0.55,
+        "support": 11
+      },
+      "fact_context": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "scene_identification": {
+        "scene_identification": 1,
+        "production_detail": 0,
+        "plot_interpretation": 4,
+        "fact_context": 0
+      },
+      "production_detail": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 6,
+        "fact_context": 0
+      },
+      "plot_interpretation": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 11,
+        "fact_context": 0
+      },
+      "fact_context": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 8,
+        "fact_context": 0
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.3978762626647949,
+      "mean_when_wrong": 0.35488077998161316,
+      "accuracy_most_confident_third": 0.8,
+      "accuracy_least_confident_third": 0.1,
+      "n_per_third": 10
+    },
+    "device": "cpu",
+    "device_name": "CPU",
+    "torch_version": "2.14.1+cu130",
+    "max_length": 128
+  }
+]
