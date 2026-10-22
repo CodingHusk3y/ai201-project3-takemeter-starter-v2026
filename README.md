@@ -295,6 +295,15 @@ agreement, and test one targeted change: increasing training from three to
 five epochs. I kept the diagnosis and the decision to stop based on the
 recorded metrics and my own comparison of the before and after runs.
 
+**Stretch work declared before implementation:**
+
+I will add a confidence check comparing the accuracy of the most-confident
+predictions with the least-confident predictions, write a per-label analysis
+of the worst confusion, and test a second measured improvement. For the
+second improvement, I will address the observed collapse by using
+class-weighted training, then record a third three-seed run in the same table
+format and report whether it helped.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -542,6 +551,58 @@ all-seeds rule.
 The improvement also increased accuracy spread from 0.033 to 0.167, so the
 after result is less stable across splits. That is evidence that five epochs
 helped some splits but made the small dataset's variance more visible.
+
+### Confidence check
+
+The model's confidence was useful but not perfectly calibrated. In the
+class-weighted run below, the most-confident third was correct on 24/30
+predictions overall (90%, 50%, and 100% by seed), while the least-confident
+third was correct on 12/30 (30%, 50%, and 40%); the mean accuracies were
+therefore 0.80 versus 0.40. The confident predictions were right more often
+than the unsure predictions, although seed 7 shows that this comparison is
+unstable on only 30 test posts.
+
+### Per-label error analysis
+
+`fact_context` is the worst label in the class-weighted run: its F1 values are
+0.308, 0.182, and 0.200, compared with higher F1 for the other three labels in
+each seed. Its most common confusion is `production_detail` (13 of 24
+`fact_context` errors across the three matrices), followed by
+`plot_interpretation` (7 errors), out of 20 total `fact_context` errors. The held-out examples have a common
+surface-pattern that explains this: they ask “why” about visible film details,
+locations, technology, chronology, or real-world context, so the model can
+mistake an external/checkable question for either a filmmaking explanation or
+an in-story explanation. The written taxonomy distinguishes those requested
+answer types, but the short questions often contain the same movie-specific
+vocabulary.
+
+### Second measured improvement
+
+**What I changed:** I added class-weighted cross-entropy, with weights computed
+from the inverse frequency of each label in each training split. This directly
+addressed the diagnosis that the model was collapsing minority labels into
+`plot_interpretation`; the implementation is in `weighted_run.py`, and the
+results are in `results_three_seeds_weighted.json`.
+
+### Run Log — Weighted
+
+| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+|---|---|---|---|---|---|
+| 1. Overall accuracy | ≥ 0.650 in every seed | 0.567 | 0.567 | 0.600 | MISSED |
+| 2. Macro F1 | ≥ 0.600 in every seed | 0.558 | 0.571 | 0.584 | MISSED |
+| 3. Every label F1 | ≥ 0.450 in every seed | 0.308 | 0.182 | 0.200 | MISSED |
+| 4. Largest-smallest label share | ≤ 25 percentage points | 20.5 pp | 20.5 pp | 20.5 pp | MET |
+| 5. Staff agreement | ≥ 24/30 posts | 30/30 | 30/30 | 30/30 | MET |
+
+**Did it help, and how do I know:**
+
+Yes, class weighting helped substantially, but it still did not meet the
+stretch targets. Compared with the five-epoch unweighted run, mean accuracy
+rose from 0.511 to 0.578 and mean macro F1 rose from 0.416 to 0.571; the
+accuracy spread also fell from 0.167 to 0.033. It fixed much of the original
+collapse: `production_detail` and `fact_context` received nonzero F1 in every
+seed, but `fact_context` remained below 0.450 in all three, so criteria 1–3
+remain missed.
 
 
 ---

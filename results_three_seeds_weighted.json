@@ -1,0 +1,215 @@
+[
+  {
+    "seed": 42,
+    "n_test": 30,
+    "accuracy": 0.5666666666666667,
+    "f1_macro": 0.558041958041958,
+    "per_label": {
+      "scene_identification": {
+        "precision": 0.8333333333333334,
+        "recall": 1.0,
+        "f1": 0.9090909090909091,
+        "support": 5
+      },
+      "production_detail": {
+        "precision": 0.5,
+        "recall": 0.3333333333333333,
+        "f1": 0.4,
+        "support": 6
+      },
+      "plot_interpretation": {
+        "precision": 0.5333333333333333,
+        "recall": 0.7272727272727273,
+        "f1": 0.6153846153846154,
+        "support": 11
+      },
+      "fact_context": {
+        "precision": 0.4,
+        "recall": 0.25,
+        "f1": 0.3076923076923077,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "scene_identification": {
+        "scene_identification": 5,
+        "production_detail": 0,
+        "plot_interpretation": 0,
+        "fact_context": 0
+      },
+      "production_detail": {
+        "scene_identification": 1,
+        "production_detail": 2,
+        "plot_interpretation": 3,
+        "fact_context": 0
+      },
+      "plot_interpretation": {
+        "scene_identification": 0,
+        "production_detail": 0,
+        "plot_interpretation": 8,
+        "fact_context": 3
+      },
+      "fact_context": {
+        "scene_identification": 0,
+        "production_detail": 2,
+        "plot_interpretation": 4,
+        "fact_context": 2
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.35442492365837097,
+      "mean_when_wrong": 0.30368155241012573,
+      "accuracy_most_confident_third": 0.9,
+      "accuracy_least_confident_third": 0.3,
+      "n_per_third": 10
+    },
+    "class_weights": {
+      "scene_identification": 1.4479166666666667,
+      "production_detail": 1.2410714285714286,
+      "plot_interpretation": 0.6682692307692307,
+      "fact_context": 0.9928571428571429
+    }
+  },
+  {
+    "seed": 7,
+    "n_test": 30,
+    "accuracy": 0.5666666666666667,
+    "f1_macro": 0.5709349130401762,
+    "per_label": {
+      "scene_identification": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8888888888888888,
+        "support": 5
+      },
+      "production_detail": {
+        "precision": 0.3333333333333333,
+        "recall": 0.8333333333333334,
+        "f1": 0.47619047619047616,
+        "support": 6
+      },
+      "plot_interpretation": {
+        "precision": 0.875,
+        "recall": 0.6363636363636364,
+        "f1": 0.7368421052631579,
+        "support": 11
+      },
+      "fact_context": {
+        "precision": 0.3333333333333333,
+        "recall": 0.125,
+        "f1": 0.18181818181818182,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "scene_identification": {
+        "scene_identification": 4,
+        "production_detail": 1,
+        "plot_interpretation": 0,
+        "fact_context": 0
+      },
+      "production_detail": {
+        "scene_identification": 0,
+        "production_detail": 5,
+        "plot_interpretation": 0,
+        "fact_context": 1
+      },
+      "plot_interpretation": {
+        "scene_identification": 0,
+        "production_detail": 3,
+        "plot_interpretation": 7,
+        "fact_context": 1
+      },
+      "fact_context": {
+        "scene_identification": 0,
+        "production_detail": 6,
+        "plot_interpretation": 1,
+        "fact_context": 1
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.3196401596069336,
+      "mean_when_wrong": 0.3104366958141327,
+      "accuracy_most_confident_third": 0.5,
+      "accuracy_least_confident_third": 0.5,
+      "n_per_third": 10
+    },
+    "class_weights": {
+      "scene_identification": 1.4479166666666667,
+      "production_detail": 1.2410714285714286,
+      "plot_interpretation": 0.6682692307692307,
+      "fact_context": 0.9928571428571429
+    }
+  },
+  {
+    "seed": 2024,
+    "n_test": 30,
+    "accuracy": 0.6,
+    "f1_macro": 0.5838516746411484,
+    "per_label": {
+      "scene_identification": {
+        "precision": 0.8333333333333334,
+        "recall": 1.0,
+        "f1": 0.9090909090909091,
+        "support": 5
+      },
+      "production_detail": {
+        "precision": 0.38461538461538464,
+        "recall": 0.8333333333333334,
+        "f1": 0.5263157894736842,
+        "support": 6
+      },
+      "plot_interpretation": {
+        "precision": 0.7777777777777778,
+        "recall": 0.6363636363636364,
+        "f1": 0.7,
+        "support": 11
+      },
+      "fact_context": {
+        "precision": 0.5,
+        "recall": 0.125,
+        "f1": 0.2,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "scene_identification": {
+        "scene_identification": 5,
+        "production_detail": 0,
+        "plot_interpretation": 0,
+        "fact_context": 0
+      },
+      "production_detail": {
+        "scene_identification": 1,
+        "production_detail": 5,
+        "plot_interpretation": 0,
+        "fact_context": 0
+      },
+      "plot_interpretation": {
+        "scene_identification": 0,
+        "production_detail": 3,
+        "plot_interpretation": 7,
+        "fact_context": 1
+      },
+      "fact_context": {
+        "scene_identification": 0,
+        "production_detail": 5,
+        "plot_interpretation": 2,
+        "fact_context": 1
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.37244510650634766,
+      "mean_when_wrong": 0.3198961317539215,
+      "accuracy_most_confident_third": 1.0,
+      "accuracy_least_confident_third": 0.4,
+      "n_per_third": 10
+    },
+    "class_weights": {
+      "scene_identification": 1.4479166666666667,
+      "production_detail": 1.2410714285714286,
+      "plot_interpretation": 0.6682692307692307,
+      "fact_context": 0.9928571428571429
+    }
+  }
+]
