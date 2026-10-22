@@ -285,6 +285,16 @@ were generated from the question title, public tags, and the written taxonomy
 rule, then each row was read and checked. No private, invited, or login-gated
 material was used.
 
+**Additional error-analysis use:**
+
+I asked an AI assistant to help me inspect the three-seed metrics and confusion
+matrix for a pattern, rather than treating the low scores as random noise. It
+pointed out the one-sided collapse into `plot_interpretation`, which led me to
+check the directional counts, compare the result with the 30/30 staff
+agreement, and test one targeted change: increasing training from three to
+five epochs. I kept the diagnosis and the decision to stop based on the
+recorded metrics and my own comparison of the before and after runs.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -540,12 +550,46 @@ helped some splits but made the small dataset's variance more visible.
 
 <!-- For each criterion still missed: what you'd do, and why you stopped. -->
 
+1. **Criterion 1 — overall accuracy (target: at least 0.650 in every
+   seed):** I would collect more examples for each boundary, especially
+   `production_detail` versus `plot_interpretation` and `fact_context` versus
+   `plot_interpretation`, then retrain with class-aware sampling and compare
+   several seeds. I stopped after the one controlled change to five epochs
+   because the best after-run accuracy was only 0.600, the weakest was 0.433,
+   and the spread grew to 0.167; more tuning without better data would not
+   establish that the 0.650 target was met reliably.
 
+2. **Criterion 2 — macro F1 (target: at least 0.600 in every seed):** I would
+   add hard negative examples and use a validation-based training choice so
+   the model is rewarded for recognizing all four labels instead of defaulting
+   to the majority-like `plot_interpretation` region. I stopped because the
+   five-epoch run improved mean macro F1 from 0.163 to 0.416 but still ranged
+   from 0.284 to 0.551, and the increased variance made further optimization
+   on this small split difficult to interpret.
+
+3. **Criterion 3 — every label F1 (target: at least 0.450 in every seed):** I
+   would expand the small and confused categories with explicitly reviewed
+   examples and evaluate per-label recall, possibly using weighted loss or
+   oversampling so `production_detail` and `fact_context` cannot disappear.
+   I stopped because `fact_context` stayed at F1 0.000 for all three after
+   seeds and `production_detail` was still 0.000 for seed 7; the 30/30 staff
+   agreement also gave no evidence that another round of relabelling was the
+   highest-value fix.
 
 **The gap between what I meant my labels to capture and what the model
 learned:**
 <!-- Two sentences. Your confusion matrix is the evidence. -->
 
+I meant the labels to separate four different answer purposes: identifying a
+work, explaining production, interpreting the fictional story, and checking
+external facts. Instead, the confusion matrix shows that the model learned a
+single broad `plot_interpretation` shortcut: it predicted that label for all 5
+`scene_identification`, all 6 `production_detail`, and all 8 `fact_context`
+posts, while correctly retaining only the 11 `plot_interpretation` posts.
+
+**Submission URL (same as the previous unit):**
+
+https://github.com/CodingHusk3y/ai201-project3-takemeter-starter-v2026
 
 
 <!-- ═════════════════════════════════════════════════════════════════════
